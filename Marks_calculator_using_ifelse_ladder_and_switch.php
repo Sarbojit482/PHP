@@ -1,0 +1,78 @@
+<?php
+$total = null;
+$percentage = null;       
+$grade = null;
+$s = readline("Do you know your percentage (Y/N): ");
+if ($s == "Y" || $s == "y") {
+    $percentage = readline("Enter your percentage category (1-(90-100), 2-(80-89), 3-(70-79), 4-(60-69), 5-(50-59), 6-(40-49), 7-(35-39)): ");
+    switch ($percentage) {
+        case 1:
+            $grade = "A+";
+            break;
+        case 2:
+            $grade = "A";
+            break;
+        case 3:
+            $grade = "B+";
+            break;
+        case 4:
+            $grade = "B";
+            break;
+        case 5:
+            $grade = "C+";
+            break;
+        case 6:
+            $grade = "C";
+            break;
+        case 7:
+            $grade = "D";
+            break;
+        default:
+            echo "The choice is incorrect\n";
+            exit;
+    }
+    echo "Your grade is: $grade\n";
+} else if ($s == "N" || $s == "n") {
+    $k = readline("Enter number of subjects (4-7): ");
+    if ($k >= 4 && $k <= 7) {
+        echo "You entered marks for $k subjects.\n";
+        $marks = [];
+        $total = 0;
+        for ($i = 1; $i <= $k; $i++) {
+            $mark = readline("Enter Marks for subject $i: ");
+            $marks[] = $mark;
+            $total += $mark;
+        }
+        
+        $percentage = ($total / ($k * 100)) * 100;
+
+        // Assign grade based on the percentage
+        if ($percentage >= 90 && $percentage <= 100) {
+            $grade = "A+";
+        } elseif ($percentage >= 80 && $percentage < 90) {
+            $grade = "A";
+        } elseif ($percentage >= 70 && $percentage < 80) {
+            $grade = "B+";
+        } elseif ($percentage >= 60 && $percentage < 70) {
+            $grade = "B";
+        } elseif ($percentage >= 50 && $percentage < 60) {
+            $grade = "C+";
+        } elseif ($percentage >= 40 && $percentage < 50) {
+            $grade = "C";
+        } elseif ($percentage >= 35 && $percentage < 40) {
+            $grade = "D";
+        } else {
+            $grade = "F";
+        }
+
+        $max_marks = $k * 100;
+        echo "Your total marks are: $total out of $max_marks\n";
+        echo "Your percentage is: $percentage%\n";
+        echo "Your grade is: $grade\n";
+    } else {
+        echo "Invalid number of subjects. Please enter a number between 4 and 7.\n";
+    }
+} else {
+    echo "Invalid input. Please enter Y/y or N/n.\n";
+}
+?>
